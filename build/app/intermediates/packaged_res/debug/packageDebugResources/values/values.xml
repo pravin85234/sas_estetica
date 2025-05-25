@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gcm_defaultSenderId" translatable="false">226741270286</string>
+    <string name="google_api_key" translatable="false">AIzaSyDhnQaJAx1OdY5IN1huUHR1tdGO1HIW_6c</string>
+    <string name="google_app_id" translatable="false">1:226741270286:android:1a3f6bd18bf7cd2792495f</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDhnQaJAx1OdY5IN1huUHR1tdGO1HIW_6c</string>
+    <string name="google_storage_bucket" translatable="false">sas-estetica-839fc.firebasestorage.app</string>
+    <string name="project_id" translatable="false">sas-estetica-839fc</string>
+    <style name="LaunchTheme" parent="@android:style/Theme.Light.NoTitleBar">
+        
+        <item name="android:windowBackground">@drawable/launch_background</item>
+    </style>
+    <style name="NormalTheme" parent="@android:style/Theme.Light.NoTitleBar">
+        <item name="android:windowBackground">?android:colorBackground</item>
+    </style>
+</resources>

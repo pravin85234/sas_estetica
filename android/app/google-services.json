@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "226741270286",
+    "project_id": "sas-estetica-839fc",
+    "storage_bucket": "sas-estetica-839fc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:226741270286:android:1a3f6bd18bf7cd2792495f",
+        "android_client_info": {
+          "package_name": "com.example.sas_estetica"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhnQaJAx1OdY5IN1huUHR1tdGO1HIW_6c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

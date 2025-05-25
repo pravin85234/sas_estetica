@@ -1,0 +1,1 @@
+ /Users/apple/Desktop/sas_estetica/.dart_tool/flutter_build/5da54621d206c4f373a86dd8359b7d90/native_assets.json: 
