@@ -40,8 +40,11 @@ class SpaProvider extends ChangeNotifier {
   }
 
   int getTotalPrice() {
-    return getSelectedServiceDetails()
-        .fold(0, (sum, s) => sum + ((s['price'] ?? 0) as int));
+    return getSelectedServiceDetails().fold(0, (sum, s) => sum + ((s['price'] ?? 0) as int));
+  }
+
+  void clearSelectedServices() {
+    _selectedServices.clear();
+    notifyListeners();
   }
 }
-

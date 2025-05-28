@@ -38,14 +38,20 @@ class _LoginScreen extends State<Loginscreen> {
         );
       } else if (result.isPermanentlyDenied) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Location permission permanently denied. Please enable it from settings.')),
+          SnackBar(content: Text('Location permission permanently denied.')),
         );
       }
     }
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    bool _canExit = false;
+
+    return WillPopScope(
+      onWillPop: () async {
+        return true;
+      },
+      child: Scaffold(
       backgroundColor: Colors.orange,
       body: SingleChildScrollView(
         child: Column(
@@ -56,7 +62,7 @@ class _LoginScreen extends State<Loginscreen> {
               padding: EdgeInsets.symmetric(vertical: 60),
               child: Column(
                 children: [
-                  Image.asset('assets/sas.jpg', height: 100), // equivalent to @drawable/imperative
+                  Image.asset('assets/sas.jpg', height: 100),
                   SizedBox(height: 10),
                   Text(
                     'Sas Estetica Solutions Private Limited',
@@ -129,7 +135,8 @@ class _LoginScreen extends State<Loginscreen> {
                             SnackBar(content: Text("Please enter all fields")),
                           );
                         } else {
-                          loginRequest();
+                          // loginRequest();
+                          login();
                         }
                       },
                       child: Text("Login", style: TextStyle(fontSize: 18)),
@@ -154,7 +161,7 @@ class _LoginScreen extends State<Loginscreen> {
             ),
           ],
         ),
-      ),
+      ),),
     );
   }
 
@@ -222,13 +229,29 @@ class _LoginScreen extends State<Loginscreen> {
       return;
     }
     try {
-      UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(
-        email: userIdController.text.trim(),
-        password: controllerPass.text.trim(),
-      );
+      try {
+        final userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: userIdController.text.trim(),
+          password: controllerPass.text.trim(),
+        );
+        print("Signed in: ${userCredential.user?.email}");
+        controllerPass.clear();
+        userIdController.clear();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Login Success")),
+        );
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Showshopsdata()),
+        );
+      }  catch (e) {
+        print("FirebaseAuth Error: "+e.toString());
 
-      Navigator.pushReplacementNamed(context, '/home');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Login failed: ${e.toString()}")),
+        );
+      }
+
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Login failed: ${e.toString()}")),

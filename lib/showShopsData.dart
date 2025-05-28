@@ -1,6 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sas_estetica/loginscreen.dart';
 import 'package:sas_estetica/spa.dart';
 import 'package:sas_estetica/spadetailsscreen.dart';
 import 'package:sas_estetica/spaprovider.dart';
@@ -33,14 +34,14 @@ class _SpaListScreenState extends State<Showshopsdata> {
 
         List<Spa> spaList = [
           Spa(name: 'Renew Day Spa', address: 'Madhapur', gender: 'Unisex', rating: 4.5, distance: 3.5, hasOffer: true, imagePath: 'assets/spa1.jpg'),
-          Spa(name: 'Mystical Mantra Spa', address: 'Kukatpally', gender: 'Male', rating: 4.5, distance: 3.5, hasOffer: false, imagePath: 'assets/spa2.jpg'),
-          Spa(name: 'Bodhi Retreat Spa', address: 'Kukatpally', gender: 'Female', rating: 4.5, distance: 3.5, hasOffer: true, imagePath: 'assets/spa3.jpg'),
-          Spa(name: 'Eternal Bliss', address: 'Madhapur', gender: 'Unisex', rating: 4.5, distance: 3.5, hasOffer: true, imagePath: 'assets/spa4.jpg'),
-          Spa(name: 'Crystal Spa', address: 'Ameerpet', gender: 'Male', rating: 4.5, distance: 3.5, hasOffer: false, imagePath: 'assets/spa6.jpg'),
-          Spa(name: 'Dreams Spa', address: 'Ameerpet', gender: 'Female', rating: 4.5, distance: 3.5, hasOffer: true, imagePath: 'assets/spa7.jpg'),
-          Spa(name: 'Epic Spa', address: 'HitechCity', gender: 'Unisex', rating: 4.5, distance: 3.5, hasOffer: true, imagePath: 'assets/spa3.jpg'),
-          Spa(name: 'Flora Spa', address: 'HitechCity', gender: 'Male', rating: 4.5, distance: 3.5, hasOffer: false, imagePath: 'assets/spa2.jpg'),
-          Spa(name: 'Zen Spa', address: 'Madhapur', gender: 'Female', rating: 4.5, distance: 3.5, hasOffer: true, imagePath: 'assets/spa4.jpg'),
+          Spa(name: 'Mystical Mantra Spa', address: 'Kukatpally', gender: 'Male', rating: 4.2, distance: 7.0, hasOffer: false, imagePath: 'assets/spa2.jpg'),
+          Spa(name: 'Bodhi Retreat Spa', address: 'Kukatpally', gender: 'Female', rating: 3.9, distance: 11.0, hasOffer: true, imagePath: 'assets/spa3.jpg'),
+          Spa(name: 'Eternal Bliss', address: 'Madhapur', gender: 'Unisex', rating: 3.0, distance: 5.5, hasOffer: true, imagePath: 'assets/spa4.jpg'),
+          Spa(name: 'Crystal Spa', address: 'Ameerpet', gender: 'Male', rating: 4.3, distance:8.0, hasOffer: false, imagePath: 'assets/spa6.jpg'),
+          Spa(name: 'Dreams Spa', address: 'Ameerpet', gender: 'Female', rating: 4.2, distance: 3.0, hasOffer: true, imagePath: 'assets/spa7.jpg'),
+          Spa(name: 'Epic Spa', address: 'HitechCity', gender: 'Unisex', rating: 4.1, distance: 2.2, hasOffer: true, imagePath: 'assets/spa3.jpg'),
+          Spa(name: 'Flora Spa', address: 'HitechCity', gender: 'Male', rating: 4.5, distance: 1.0, hasOffer: false, imagePath: 'assets/spa2.jpg'),
+          Spa(name: 'Zen Spa', address: 'Madhapur', gender: 'Female', rating: 4.5, distance: 2.5, hasOffer: true, imagePath: 'assets/spa4.jpg'),
         ];
 
         setState(() {
@@ -85,7 +86,16 @@ class _SpaListScreenState extends State<Showshopsdata> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (_) => Loginscreen()),
+              (route) => false,
+        );
+        return false;
+      },
+      child: Scaffold(
       appBar: AppBar(
         title: Text("Spas"),
         backgroundColor: Colors.white,
@@ -100,7 +110,7 @@ class _SpaListScreenState extends State<Showshopsdata> {
             child: TextField(
               onChanged: _filterSpas,
               decoration: InputDecoration(
-                hintText: 'Search Spa, Services...',
+                hintText: 'Search Spa, Services.',
                 prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
               ),
@@ -165,7 +175,7 @@ class _SpaListScreenState extends State<Showshopsdata> {
             ),
           ),
         ],
-      ),
+      ),),
     );
   }
 

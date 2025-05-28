@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'package:sas_estetica/spadetailsscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sas_estetica/showShopsData.dart';
 
@@ -17,8 +18,8 @@ class CartScreen extends StatelessWidget {
     final provider = Provider.of<SpaProvider>(context);
     final selectedServices = provider.getSelectedServiceDetails();
     final totalPrice = provider.getTotalPrice();
-    final convenienceFee = 100;
-    final additionalFee = 50;
+    final convenienceFee = selectedServices.isEmpty?0:100;
+    final additionalFee = selectedServices.isEmpty?0:50;
     final payable = totalPrice + convenienceFee + additionalFee;
 
     return Scaffold(
@@ -40,19 +41,18 @@ class CartScreen extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 GestureDetector(
-                  // onTap: () {
-                  //   Navigator.of(context).push(
-                  //     MaterialPageRoute(
-                  //       builder: (context) => Showshopsdata(categoryFilter: 'Massage Therapist'),
-                  //     ),
-                  //   );
-                  // },
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => SpaDetailScreen(shopName: shopName),
+                      ),
+                    );
+                  },
                   child: Text(
                     "+ Add more",
                     style: TextStyle(
                       color: Colors.brown,
-                      fontWeight: FontWeight.bold,
-                    ),
+                      fontWeight: FontWeight.bold,),
                   ),
                 ),
               ],
@@ -214,7 +214,6 @@ class _BookingConfirmationDialogState extends State<BookingConfirmationDialog> {
   @override
   void initState() {
     super.initState();
-    // Generate default payment ID, for example:
     paymentId = "PAY" + DateTime.now().millisecondsSinceEpoch.toString();
 
     _saveBookingData();
@@ -223,7 +222,6 @@ class _BookingConfirmationDialogState extends State<BookingConfirmationDialog> {
   Future<void> _saveBookingData() async {
     final prefs = await SharedPreferences.getInstance();
 
-    // Construct a booking info map
     final bookingInfo = {
       "paymentId": paymentId,
       "shopName": widget.shopName,
